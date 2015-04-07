@@ -1,0 +1,270 @@
+\documentclass[10pt,landscape]{article}
+\usepackage{a4}
+\usepackage{amsmath}
+\usepackage{color}
+\setlength{\hoffset}{-1.0in}
+\addtolength{\textwidth}{1.0in}
+\addtolength{\topmargin}{-0.875in}
+\addtolength{\textheight}{-2.1in}
+
+\title{tran\_2009}
+\author{}
+\date{}
+\begin{document}  
+\maketitle
+\newcommand{\ud}{\mathrm{d}}
+\section{``environment'' component}
+This component has no equations.
+\section{``sarcomere\_geometry'' component}
+\textbf{}
+\begin{displaymath}sovr\_ze = 
+\begin{cases}\frac{len\_thick}{2};
+        &  \text{if }\frac{len\_thick}{2} < \frac{SL}{2},\\\frac{SL}{2}&  \text{otherwise}.
+\end{cases}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}sovr\_cle = 
+\begin{cases}\left(\frac{SL}{2}-\left(SL-len\_thin\right)\right);
+        &  \text{if }\left(\frac{SL}{2}-\left(SL-len\_thin\right)\right) > \frac{len\_hbare}{2},\\\frac{len\_hbare}{2}&  \text{otherwise}.
+\end{cases}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}len\_sovr = \left(sovr\_ze-sovr\_cle\right)
+\end{displaymath}
+\textbf{}
+\begin{displaymath}SOVFThick = \frac{len\_sovr \ast 2}{\left(len\_thick-len\_hbare\right)}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}SOVFThin = \frac{len\_sovr}{len\_thin}
+\end{displaymath}
+\section{``Ca\_binding\_to\_troponin\_to\_thin\_filament\_regulation'' component}
+\textbf{}
+\begin{displaymath}konT = \frac{\left(\left(kdHCa\right)^{m}+\left(H\_cons\right)^{m}\right)}{\left(\left(kdHCa\right)^{m}+\left(H\right)^{m}\right)} \ast kon \ast \left(Qkon\right)^{\frac{\left(TmpC-37\right)}{10}}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}H = 106 \ast \left(10\right)^{-(pH)}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}H\_cons = 106 \ast \left(10\right)^{-7.15}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}koffLT = koffL \ast koffmod \ast \left(Qkoff\right)^{\frac{\left(TmpC-37\right)}{10}}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}koffHT = koffH \ast koffmod \ast \left(Qkoff\right)^{\frac{\left(TmpC-37\right)}{10}}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}kn\_pT = kn\_p \ast permtot \ast \left(Qkn\_p\right)^{\frac{\left(TmpC-37\right)}{10}}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}kp\_nT = kp\_n \ast inprmt \ast \left(Qkp\_n\right)^{\frac{\left(TmpC-37\right)}{10}}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}permtot = \sqrt{\arrowvert\frac{1}{\left(1+\left(\frac{perm50}{Tropreg}\right)^{nperm}\right)}\arrowvert}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}inprmt = 
+\begin{cases}\frac{1}{permtot};
+        &  \text{if }\frac{1}{permtot} < 100,\\100&  \text{otherwise}.
+\end{cases}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}\frac{\ud(TRPNCaL)}{\ud(time)} = dTRPNCaL
+\end{displaymath}
+\textbf{}
+\begin{displaymath}dTRPNCaL = \left(konT \ast Cai \ast \left(1-TRPNCaL\right)-koffLT \ast TRPNCaL\right)
+\end{displaymath}
+\textbf{}
+\begin{displaymath}\frac{\ud(TRPNCaH)}{\ud(time)} = dTRPNCaH
+\end{displaymath}
+\textbf{}
+\begin{displaymath}dTRPNCaH = \left(konT \ast Cai \ast \left(1-TRPNCaH\right)-koffHT \ast TRPNCaH\right)
+\end{displaymath}
+\textbf{}
+\begin{displaymath}Tropreg = \left(\left(1-SOVFThin\right) \ast TRPNCaL+SOVFThin \ast TRPNCaH\right)
+\end{displaymath}
+\section{``thin\_filament\_regulation\_and\_crossbridge\_cycling\_rates'' component}
+\textbf{}
+\begin{displaymath}fappT = fapp \ast xbmodsp \ast \left(Qfapp\right)^{\frac{\left(TmpC-37\right)}{10}}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}gapslmd = \left(1+\left(1-SOVFThick\right) \ast gslmod\right)
+\end{displaymath}
+\textbf{}
+\begin{displaymath}gappT = gapp \ast gapslmd \ast xbmodsp \ast \left(Qgapp\right)^{\frac{\left(TmpC-37\right)}{10}}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}hfmd = e^{\frac{-(xXBprer)}{\arrowvert xXBprer\arrowvert} \ast hfmdc \ast \left(\frac{xXBprer}{x\_0}\right)^{2}}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}hbmd = e^{\frac{\left(xXBpostr-x\_0\right)}{\arrowvert\left(xXBpostr-x\_0\right)\arrowvert} \ast hbmdc \ast \left(\frac{\left(xXBpostr-x\_0\right)}{x\_0}\right)^{2}}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}hfT = hf \ast hfmd \ast xbmodsp \ast \left(Qhf\right)^{\frac{\left(TmpC-37\right)}{10}}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}hbT = hb \ast hbmd \ast xbmodsp \ast \left(Qhb\right)^{\frac{\left(TmpC-37\right)}{10}}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}gxbmd = 
+\begin{cases}e^{sigmap \ast \left(\frac{\left(x\_0-xXBpostr\right)}{x\_0}\right)^{2}};
+        &  \text{if }xXBpostr < x\_0,\\e^{sigman \ast \left(\frac{\left(xXBpostr-x\_0\right)}{x\_0}\right)^{2}}&  \text{otherwise}.
+\end{cases}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}gxbT = gxb \ast gxbmd \ast xbmodsp \ast \left(Qgxb\right)^{\frac{\left(TmpC-37\right)}{10}}
+\end{displaymath}
+\section{``regulation\_and\_crossbridge\_cycling\_state\_equations'' component}
+\textbf{}
+\begin{displaymath}\frac{\ud(N\_NoXB)}{\ud(time)} = \left(kp\_nT \ast P\_NoXB-kn\_pT \ast N\_NoXB\right)
+\end{displaymath}
+\textbf{}
+\begin{displaymath}\frac{\ud(P\_NoXB)}{\ud(time)} = \left(kn\_pT \ast N\_NoXB-kp\_nT \ast P\_NoXB\right)
+\end{displaymath}
+\textbf{}
+\begin{displaymath}N = \left(1-\left(P+XBprer+XBpostr\right)\right)
+\end{displaymath}
+\textbf{}
+\begin{displaymath}\frac{\ud(P)}{\ud(time)} = \left(kn\_pT \ast N-\left(kp\_nT+alpha1\_plus\right) \ast P\right)
+\end{displaymath}
+\textbf{}
+\begin{displaymath}\frac{\ud(XBprer)}{\ud(time)} = dXBprer
+\end{displaymath}
+\textbf{}
+\begin{displaymath}dXBprer = \left(\left(alpha1\_plus \ast P+alpha2\_minus \ast XBpostr\right)-\left(alpha1\_minus+alpha2\_plus\right) \ast XBprer\right)
+\end{displaymath}
+\textbf{}
+\begin{displaymath}\frac{\ud(XBpostr)}{\ud(time)} = dXBpostr
+\end{displaymath}
+\textbf{}
+\begin{displaymath}dXBpostr = \left(\left(alpha3\_minus \ast P+alpha2\_plus \ast XBprer\right)-\left(alpha2\_minus+alpha3\_plus\right) \ast XBpostr\right)
+\end{displaymath}
+\textbf{}
+\begin{displaymath}alpha1\_plus = fappT
+\end{displaymath}
+\textbf{}
+\begin{displaymath}alpha2\_plus = hfT
+\end{displaymath}
+\textbf{}
+\begin{displaymath}alpha3\_plus = MgATP \ast \frac{gxbT}{MgATP\_cons} \ast \frac{\left(kdADP+MgADP\_cons\right)}{\left(kdADP+MgADP\right)}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}alpha1\_minus = xPi \ast \frac{gappT}{xPi\_cons}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}alpha2\_minus = H \ast \frac{hbT}{H\_cons} \ast \frac{\left(kdADP+MgADP\_cons\right)}{MgADP\_cons} \ast \frac{MgADP}{\left(kdADP+MgADP\right)}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}alpha3\_minus = fxbT
+\end{displaymath}
+\textbf{}
+\begin{displaymath}fxbT = \frac{kdADP \ast fappT \ast hfT \ast \frac{gxbT}{MgATP\_cons}}{\frac{gappT}{xPi\_cons} \ast \frac{hbT}{H\_cons} \ast kMgATP}
+\end{displaymath}
+\section{``mean\_strain\_of\_strongly\_bound\_states'' component}
+\textbf{}
+\begin{displaymath}\frac{\ud(xXBprer)}{\ud(time)} = dxXBprer
+\end{displaymath}
+\textbf{}
+\begin{displaymath}dxXBprer = \left(\frac{dSL}{2}+\frac{xPsi}{dutyprer} \ast \left(-(alpha1\_plus \ast xXBprer)+alpha2\_minus \ast \left(xXBpostr-\left(x\_0+xXBprer\right)\right)\right)\right)
+\end{displaymath}
+\textbf{}
+\begin{displaymath}\frac{\ud(xXBpostr)}{\ud(time)} = dxXBpostr
+\end{displaymath}
+\textbf{}
+\begin{displaymath}dxXBpostr = \left(\frac{dSL}{2}+\frac{xPsi}{dutypostr} \ast alpha2\_plus \ast \left(\left(xXBprer+x\_0\right)-xXBpostr\right)\right)
+\end{displaymath}
+\textbf{}
+\begin{displaymath}dutyprer = \frac{\left(alpha3\_minus \ast alpha2\_minus+alpha3\_plus \ast alpha1\_plus+alpha2\_minus \ast alpha1\_plus\right)}{\left(alpha1\_plus \ast alpha2\_plus+alpha3\_minus \ast alpha1\_minus+alpha3\_minus \ast alpha2\_plus+alpha3\_minus \ast alpha2\_minus+alpha3\_plus \ast alpha1\_plus+alpha2\_minus \ast alpha1\_plus+alpha2\_plus \ast alpha3\_plus+alpha3\_minus \ast alpha1\_minus+alpha3\_plus \ast alpha1\_minus\right)}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}dutypostr = \frac{\left(alpha1\_plus \ast alpha2\_plus+alpha3\_minus \ast alpha1\_minus+alpha3\_minus \ast alpha2\_plus\right)}{\left(alpha1\_plus \ast alpha2\_plus+alpha3\_minus \ast alpha1\_minus+alpha3\_minus \ast alpha2\_plus+alpha3\_minus \ast alpha2\_minus+alpha3\_plus \ast alpha1\_plus+alpha2\_minus \ast alpha1\_plus+alpha2\_plus \ast alpha3\_plus+alpha3\_minus \ast alpha1\_minus+alpha3\_plus \ast alpha1\_minus\right)}
+\end{displaymath}
+\section{``normalised\_active\_and\_passive\_force'' component}
+\textbf{}
+\begin{displaymath}fxb = \frac{kdADP \ast fapp \ast hf \ast \frac{gxb}{MgATP\_cons}}{\frac{gapp}{xPi\_cons} \ast \frac{hb}{H\_cons} \ast kMgATP}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}SSXBprer = \frac{\left(fxb \ast hb+gxb \ast fapp+hbT \ast fapp\right)}{\left(hf \ast gxb+hb \ast gapp+gxb \ast gapp+fxb \ast hb+gxb \ast fapp+hb \ast fapp+fxb \ast gapp+fapp \ast hf+fxb \ast hb\right)}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}SSXBpostr = \frac{\left(fapp \ast hf+fxb \ast gapp+fxb \ast hb\right)}{\left(hf \ast gxb+hb \ast gapp+gxb \ast gapp+fxb \ast hb+gxb \ast fapp+hb \ast fapp+fxb \ast gapp+fapp \ast hf+fxb \ast hb\right)}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}Fnordv = kxb \ast x\_0 \ast SSXBpostr
+\end{displaymath}
+\textbf{}
+\begin{displaymath}force = kxb \ast SOVFThick \ast \left(xXBpostr \ast XBpostr+xXBprer \ast XBprer\right)
+\end{displaymath}
+\textbf{}
+\begin{displaymath}active = \frac{1 \ast force}{Fnordv}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}ppforce\_t = \frac{\left(SL-SLrest\right)}{\arrowvert\left(SL-SLrest\right)\arrowvert} \ast PCon\_t \ast \left(e^{PExp\_t \ast \arrowvert\left(SL-SLrest\right)\arrowvert}-1\right)
+\end{displaymath}
+\textbf{}
+\begin{displaymath}ppforce\_c = 
+\begin{cases}PCon\_c \ast \left(e^{PExp\_c \ast \arrowvert\left(SL-SL\_c\right)\arrowvert}-1\right);
+        &  \text{if }SL > SL\_c,\\0&  \text{otherwise}.
+\end{cases}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}ppforce = \left(ppforce\_t+ppforce\_c\right)
+\end{displaymath}
+\textbf{}
+\begin{displaymath}preload = \frac{\arrowvert\left(SLset-SLrest\right)\arrowvert}{\left(SLset-SLrest\right)} \ast PCon\_t \ast \left(e^{PExp\_t \ast \arrowvert\left(SLset-SLrest\right)\arrowvert}-1\right)
+\end{displaymath}
+\textbf{}
+\begin{displaymath}afterload = 
+\begin{cases}KSE \ast \left(SLset-SL\right);
+        &  \text{if }SEon = 1,\\0&  \text{otherwise}.
+\end{cases}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}\frac{\ud(SL)}{\ud(time)} = dSL
+\end{displaymath}
+\textbf{}
+\begin{displaymath}dSL = 0
+\end{displaymath}
+\textbf{}
+\begin{displaymath}\frac{\ud(intf)}{\ud(time)} = \left(\left(preload+afterload\right)-\left(ppforce+active\right)\right)
+\end{displaymath}
+\section{``calculation\_of\_micromolar\_per\_millisecondes\_of\_Ca\_for\_apparent\_Ca\_binding'' component}
+\textbf{}
+\begin{displaymath}FrSBXB = \frac{\left(XBpostr+XBprer\right)}{\left(SSXBpostr+SSXBprer\right)}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}dFrSBXB = \frac{\left(dXBpostr+dXBprer\right)}{\left(SSXBpostr+SSXBprer\right)}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}dsovr\_ze = 
+\begin{cases}-(0.5) \ast dSL;
+        &  \text{if }SL < len\_thick,\\0&  \text{otherwise}.
+\end{cases}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}dsovr\_cle = 
+\begin{cases}-(0.5) \ast dSL;
+        &  \text{if }\left(2 \ast len\_thin-SL\right) > len\_hbare,\\0&  \text{otherwise}.
+\end{cases}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}dlen\_sovr = \left(dsovr\_ze-dsovr\_cle\right)
+\end{displaymath}
+\textbf{}
+\begin{displaymath}dSOVFThin = \frac{dlen\_sovr}{len\_thin}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}dSOVFThick = \frac{2 \ast dlen\_sovr}{\left(len\_thick-len\_hbare\right)}
+\end{displaymath}
+\textbf{}
+\begin{displaymath}TropTot = Trop\_conc \ast \left(\left(1-SOVFThin\right) \ast TRPNCaL+SOVFThin \ast \left(FrSBXB \ast TRPNCaH+\left(1-FrSBXB\right) \ast TRPNCaL\right)\right)
+\end{displaymath}
+\textbf{}
+\begin{displaymath}dTropTot = Trop\_conc \ast \left(-(dSOVFThin) \ast TRPNCaL+\left(1-SOVFThin\right) \ast dTRPNCaL+dSOVFThin \ast \left(FrSBXB \ast TRPNCaH+\left(1-FrSBXB\right) \ast TRPNCaL\right)+SOVFThin \ast \left(\left(dFrSBXB \ast TRPNCaH+FrSBXB \ast dTRPNCaH+\left(1-FrSBXB\right) \ast dTRPNCaL\right)-dFrSBXB \ast TRPNCaL\right)\right)
+\end{displaymath}
+\textbf{}
+\begin{displaymath}dforce = \left(kxb \ast dSOVFThick \ast \left(xXBpostr \ast XBpostr+xXBprer \ast XBprer\right)+kxb \ast SOVFThick \ast \left(dxXBpostr \ast XBpostr+xXBpostr \ast dXBpostr+dxXBprer \ast XBprer+xXBprer \ast dXBprer\right)\right)
+\end{displaymath}
+\section{``model\_parameters'' component}
+This component has no equations.
+\end{document}
